@@ -12,7 +12,11 @@ namespace ExerciseApp
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            // SetContentView (Resource.Layout.Main);
+            SetContentView(Resource.Layout.Main);
+
+            // Get the UI controls from the loaded layout
+            EditText pushUpsToAdd = FindViewById<EditText>(Resource.Id.pushUpsToAdd);
+            Button addButton = FindViewById<Button>(Resource.Id.addButton);
         }
     }
 }

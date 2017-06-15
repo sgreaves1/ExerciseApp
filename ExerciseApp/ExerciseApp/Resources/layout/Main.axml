@@ -20,4 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addButton" />
+    <TextView
+        android:text="Total"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalLabel" />
 </LinearLayout>
