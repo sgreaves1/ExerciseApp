@@ -21,6 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/addButton" />
+    <Button
+        android:text="Clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/clearButton" />
     <TextView
         android:text="Total"
         android:textAppearance="?android:attr/textAppearanceLarge"
