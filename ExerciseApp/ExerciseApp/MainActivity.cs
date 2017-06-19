@@ -4,6 +4,7 @@ using Android.Widget;
 using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
+using System.Collections.Generic;
 
 namespace ExerciseApp
 {
@@ -16,6 +17,8 @@ namespace ExerciseApp
         private TextView _totalLabel;
         private Exercise _todaysData;
         private readonly Database _db = new Database("exercise.db3");
+
+        private WorkoutRoutine _routine; 
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -38,7 +41,7 @@ namespace ExerciseApp
             addButton.Click += AddButtonOnClick;
             clearButton.Click += ClearButtonOnClick;
 
-            PopulateTodaysData();
+            PopulateTodaysRoutine();
         }
         
         private void AddButtonOnClick(object sender, EventArgs eventArgs)
@@ -61,21 +64,20 @@ namespace ExerciseApp
         {
             _db.UpdateData(_todaysData);
         }
-
-        private void PopulateTodaysData()
+                
+        private void PopulateTodaysRoutine()
         {
-            _todaysData = _db.GetTodaysData();
-            if (_todaysData != null)
-            {                
-                _dateLabel.Text = _todaysData.Date.ToString(@"dd/MM/yy");
-                _exerciseLabel.Text = _todaysData.Name;
-                _totalLabel.Text = _todaysData.Amount.ToString();
+            _routine = _db.GetTodaysRoutine();
+            if (_routine != null)
+            {
+                _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");
+                _exerciseLabel.Text = _routine.Name;
             }
             else
             {
-                _todaysData = new Exercise();
-                _db.InsertData(_todaysData);
-                PopulateTodaysData();
+                _routine = new WorkoutRoutine();
+                _db.InsertData(_routine);
+                PopulateTodaysRoutine();
             }
         }
 

@@ -43,6 +43,39 @@ namespace ExerciseApp.Data
             return null;
         }
 
+        public WorkoutRoutine GetTodaysRoutine()
+        {
+            try
+            {
+                var db = new SQLiteConnection(DatabaseLocation);
+
+                var tabel = db.Table<WorkoutRoutine>();
+
+                foreach (var item in tabel)
+                {
+                    if (item.Date.Year == DateTime.Today.Year)
+                        if (item.Date.Month == DateTime.Today.Month)
+                            if (item.Date.Day == DateTime.Today.Day)
+                            {
+                                WorkoutRoutine routine = new WorkoutRoutine
+                                {
+                                    Date = item.Date,
+                                    ID = item.ID,
+                                    Name = item.Name
+                                };
+
+                                return routine;
+                            }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return null;
+        }
+
         public string CreateDatabase()
         {
             try
@@ -58,7 +91,7 @@ namespace ExerciseApp.Data
             }
         }
 
-        public string InsertData(Exercise data)
+        public string InsertData(WorkoutRoutine data)
         {
             try
             {
