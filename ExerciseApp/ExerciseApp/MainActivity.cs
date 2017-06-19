@@ -11,6 +11,7 @@ namespace ExerciseApp
     public class MainActivity : Activity
     {
         private TextView _dateLabel;
+        private TextView _exerciseLabel;
         private EditText _pushUpsToAdd;
         private TextView _totalLabel;
         private Exercise _todaysData;
@@ -28,6 +29,7 @@ namespace ExerciseApp
 
             // Get the UI controls from the loaded layout
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
+            _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
             _pushUpsToAdd = FindViewById<EditText>(Resource.Id.pushUpsToAdd);
             _totalLabel = FindViewById<TextView>(Resource.Id.totalLabel);
             Button addButton = FindViewById<Button>(Resource.Id.addButton);
@@ -64,9 +66,10 @@ namespace ExerciseApp
         {
             _todaysData = _db.GetTodaysData();
             if (_todaysData != null)
-            {
-                _totalLabel.Text = _todaysData.Amount.ToString();
+            {                
                 _dateLabel.Text = _todaysData.Date.ToString(@"dd/MM/yy");
+                _exerciseLabel.Text = _todaysData.Name;
+                _totalLabel.Text = _todaysData.Amount.ToString();
             }
             else
             {

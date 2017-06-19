@@ -17,6 +17,7 @@ namespace ExerciseApp.Model
         public Exercise()
         {
             ID = 0;
+            Name = "Push-Ups";
             Amount = 0;
             Date = DateTime.Today;
         }
