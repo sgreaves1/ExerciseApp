@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Database.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Model\Exercise.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

@@ -55,7 +55,7 @@ namespace ExerciseApp
         
         private void SaveAmount()
         {
-            _db.InsertUpdateData(_todaysData);
+            _db.UpdateData(_todaysData);
 
         }
 
@@ -70,6 +70,8 @@ namespace ExerciseApp
             {
                 _todaysData = new Exercise();
                 _totalLabel.Text = _todaysData.Amount.ToString();
+                _db.InsertData(_todaysData);
+                PopulateTodaysData();
             }
         }
 

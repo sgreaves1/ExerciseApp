@@ -58,14 +58,31 @@ namespace ExerciseApp.Data
             }
         }
 
-        public string InsertUpdateData(Exercise data)
+        public string InsertData(Exercise data)
+        {
+            try
+            {
+                if (data.ID == 0)
+                {
+                    var db = new SQLiteConnection(DatabaseLocation);
+                    db.Insert(data);
+                    return "Single data file inserted";
+                }
+                return "ID not 0, cant insert";
+            }
+            catch (SQLiteException ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string UpdateData(Exercise data)
         {
             try
             {
                 var db = new SQLiteConnection(DatabaseLocation);
-                if (db.Insert(data) != 0)
-                    db.Update(data);
-                return "Single data file inserted or updated";
+                db.Update(data);
+                return "Single data file updated";
             }
             catch (SQLiteException ex)
             {
