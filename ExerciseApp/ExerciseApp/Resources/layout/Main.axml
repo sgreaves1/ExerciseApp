@@ -6,6 +6,12 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateLabel" />
+    <TextView
         android:text="Push ups"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"

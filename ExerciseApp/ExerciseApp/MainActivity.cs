@@ -10,6 +10,7 @@ namespace ExerciseApp
     [Activity(Label = "ExerciseApp", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        private TextView _dateLabel;
         private EditText _pushUpsToAdd;
         private TextView _totalLabel;
         private Exercise _todaysData;
@@ -26,6 +27,7 @@ namespace ExerciseApp
             _db.CreateDatabase();
 
             // Get the UI controls from the loaded layout
+            _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
             _pushUpsToAdd = FindViewById<EditText>(Resource.Id.pushUpsToAdd);
             _totalLabel = FindViewById<TextView>(Resource.Id.totalLabel);
             Button addButton = FindViewById<Button>(Resource.Id.addButton);
@@ -56,7 +58,6 @@ namespace ExerciseApp
         private void SaveAmount()
         {
             _db.UpdateData(_todaysData);
-
         }
 
         private void PopulateTodaysData()
@@ -65,11 +66,11 @@ namespace ExerciseApp
             if (_todaysData != null)
             {
                 _totalLabel.Text = _todaysData.Amount.ToString();
+                _dateLabel.Text = _todaysData.Date.ToString(@"dd/MM/yy");
             }
             else
             {
                 _todaysData = new Exercise();
-                _totalLabel.Text = _todaysData.Amount.ToString();
                 _db.InsertData(_todaysData);
                 PopulateTodaysData();
             }
