@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/dateLabel" />
     <TextView
+        android:text="Routine"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/routine" />
+    <TextView
         android:text="Push ups"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
