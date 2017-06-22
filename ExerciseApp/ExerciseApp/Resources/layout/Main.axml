@@ -1,47 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:layout_height="match_parent">
     <TextView
         android:text="Date"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dateLabel" />
     <TextView
         android:text="Routine"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
+        android:layout_below="@id/dateLabel"
         android:id="@+id/routine" />
     <TextView
         android:text="Push ups"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/exerciseLabel" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pushUpsToAdd"
-        android:inputType="number" />
+        android:layout_below="@id/routine"
+        android:id="@+id/exerciseLabel"
+        android:layout_alignParentBottom="true" />
     <Button
-        android:text="Add"
-        android:layout_width="match_parent"
+        android:text="Do Workout"
+        android:id="@+id/doWorkoutButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/addButton" />
-    <Button
-        android:text="Clear"
-        android:layout_width="match_parent"
+        android:layout_below="@id/routine"
+        android:layout_alignParentRight="true" />
+    <GridView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/clearButton" />
-    <TextView
-        android:text="Total"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/totalLabel" />
-</LinearLayout>
+        android:id="@+id/gridView1"
+        android:layout_alignParentBottom="true">
+    </GridView>
+</RelativeLayout>
