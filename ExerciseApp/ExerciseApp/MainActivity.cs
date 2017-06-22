@@ -35,13 +35,15 @@ namespace ExerciseApp
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
             _routineLabel = FindViewById<TextView>(Resource.Id.routine);
             _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
-            _pushUpsToAdd = FindViewById<EditText>(Resource.Id.pushUpsToAdd);
-            _totalLabel = FindViewById<TextView>(Resource.Id.totalLabel);
-            Button addButton = FindViewById<Button>(Resource.Id.addButton);
-            Button clearButton = FindViewById<Button>(Resource.Id.clearButton);
+            //_pushUpsToAdd = FindViewById<EditText>(Resource.Id.pushUpsToAdd);
+            //_totalLabel = FindViewById<TextView>(Resource.Id.totalLabel);
+            //Button addButton = FindViewById<Button>(Resource.Id.addButton);
+            //Button clearButton = FindViewById<Button>(Resource.Id.clearButton);
+            //var gridView = FindViewById<GridView>(Resource.Id.gridView1);
+            //gridView.Adapter = new ImageAdapter(this);
             
-            addButton.Click += AddButtonOnClick;
-            clearButton.Click += ClearButtonOnClick;
+            //addButton.Click += AddButtonOnClick;
+            //clearButton.Click += ClearButtonOnClick;
 
             PopulateTodaysRoutine();
         }
