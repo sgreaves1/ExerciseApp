@@ -16,6 +16,7 @@ namespace ExerciseApp.Data
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal), path);
         }
 
+        //Testing Committing!
         public Exercise GetTodaysData()
         {
             var db = new SQLiteConnection(DatabaseLocation);
@@ -82,7 +83,6 @@ namespace ExerciseApp.Data
             {
                 var connection = new SQLiteConnection(DatabaseLocation);
                 connection.CreateTable<Exercise>();
-                connection.CreateTable<WorkoutRoutine>();
                 return "Database created";
 
             }
