@@ -83,6 +83,7 @@ namespace ExerciseApp.Data
             {
                 var connection = new SQLiteConnection(DatabaseLocation);
                 connection.CreateTable<Exercise>();
+                connection.CreateTable<WorkoutRoutine>();
                 return "Database created";
 
             }
