@@ -39,8 +39,8 @@ namespace ExerciseApp
             //_totalLabel = FindViewById<TextView>(Resource.Id.totalLabel);
             //Button addButton = FindViewById<Button>(Resource.Id.addButton);
             //Button clearButton = FindViewById<Button>(Resource.Id.clearButton);
-            //var gridView = FindViewById<GridView>(Resource.Id.gridView1);
-            //gridView.Adapter = new ImageAdapter(this);
+            var gridView = FindViewById<GridView>(Resource.Id.gridView1);
+            gridView.Adapter = new ImageAdapter(this);
             
             //addButton.Click += AddButtonOnClick;
             //clearButton.Click += ClearButtonOnClick;
