@@ -1,7 +1,8 @@
-﻿using Android.Content;
+﻿using System;
+using Android.Content;
 using Android.Views;
 using Android.Widget;
-using Java.Lang;
+using Object = Java.Lang.Object;
 
 namespace ExerciseApp
 {
@@ -25,7 +26,15 @@ namespace ExerciseApp
             var button = new ImageButton(context) {LayoutParameters = new GridView.LayoutParams(200, 200)};
             button.SetScaleType(ImageView.ScaleType.CenterCrop);
             button.SetImageResource(_thumbIds[position]);
+            button.Click += ButtonOnClick;
             return button;
+        }
+
+        private void ButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            var activity2 = new Intent(context, typeof(AddExerciseActivity));
+            activity2.PutExtra("ExerciseName", "Push Ups");
+            context.StartActivity(activity2);
         }
 
         private readonly int[] _thumbIds =
