@@ -42,6 +42,15 @@ namespace ExerciseApp
         {
             _routine = _db.GetTodaysRoutine();
 
+            if (_routine == null)
+            {
+                _routine = new WorkoutRoutine();
+
+                _db.InsertData(_routine);
+
+                _routine = _db.GetTodaysRoutine();
+            }
+
             if (_routine.Id > 0)
                 _routine.Exercises = _db.GetExercisesByRoutineId(_routine.Id);
 

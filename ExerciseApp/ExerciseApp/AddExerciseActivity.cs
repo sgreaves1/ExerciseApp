@@ -55,10 +55,13 @@ namespace ExerciseApp
                         RoutineId = _routineId,
                         Name = _exerciseNameLabel.Text,
                         Date = DateTime.Now,
-                        Amount = int.Parse(_amount.Text)
+                        Amount = int.Parse(_amount.Text),
+                        Done = true,
                     };
 
                     _db.InsertData(exercise);
+
+                    Toast.MakeText(this, exercise.Name + " added to todays routine!", ToastLength.Short).Show();
 
                     Finish();
                 }
