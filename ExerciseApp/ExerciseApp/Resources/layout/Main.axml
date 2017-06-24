@@ -17,6 +17,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/dateLabel"
         android:id="@+id/routine" />
+    <Button
+        android:text="Edit"
+        android:id="@+id/editRoutineName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/routine"
+        android:layout_alignParentRight="true" />
     <TextView
         android:text="Push ups"
         android:textAppearance="?android:attr/textAppearanceLarge"
