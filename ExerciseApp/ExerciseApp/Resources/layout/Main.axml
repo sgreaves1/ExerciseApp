@@ -20,9 +20,9 @@
     <Button
         android:text="Edit"
         android:id="@+id/editRoutineName"
+        android:layout_below="@id/dateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/routine"
         android:layout_alignParentRight="true" />
     <TextView
         android:text="Push ups"
@@ -31,14 +31,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/routine"
         android:id="@+id/exerciseLabel"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20.0dp" />
     <Button
         android:text="Do Workout"
         android:id="@+id/doWorkoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/routine"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20.0dp" />
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
