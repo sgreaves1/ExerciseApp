@@ -8,6 +8,7 @@ namespace ExerciseApp.Data
 {
     public class Database
     {
+        // I love lima, dave and all me unknown viwers, please make yourself known
         public string DatabaseLocation { get; set; }
 
         public Database(string path)
