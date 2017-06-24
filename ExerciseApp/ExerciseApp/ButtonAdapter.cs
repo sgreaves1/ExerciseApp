@@ -9,10 +9,12 @@ namespace ExerciseApp
     internal class ButtonAdapter : BaseAdapter
     {
         private Context context;
+        private int _routineId;
 
-        public ButtonAdapter(Context c)
+        public ButtonAdapter(Context c, int RoutineId)
         {
             context = c;
+            _routineId = RoutineId;
         }
 
         public override int Count => _thumbIds.Length;
@@ -34,6 +36,7 @@ namespace ExerciseApp
         {
             var activity2 = new Intent(context, typeof(AddExerciseActivity));
             activity2.PutExtra("ExerciseName", "Push Ups");
+            activity2.PutExtra("RoutineId", _routineId);
             context.StartActivity(activity2);
         }
 

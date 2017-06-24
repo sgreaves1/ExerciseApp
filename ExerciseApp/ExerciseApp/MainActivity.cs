@@ -31,19 +31,28 @@ namespace ExerciseApp
             // Create db if it doesn't exist
             _db.CreateDatabase();
 
+            // Get todays routine from db
+            _routine = _db.GetTodaysRoutine();
+
             // Get the UI controls from the loaded layout
+            GetUiElements();
+
+            // Populate the view from the routine model 
+            PopulateTodaysRoutine();
+        }
+
+        private void GetUiElements()
+        {
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
             _routineLabel = FindViewById<TextView>(Resource.Id.routine);
             _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
             var gridView = FindViewById<GridView>(Resource.Id.gridView1);
-            gridView.Adapter = new ButtonAdapter(this);
-
-            PopulateTodaysRoutine();
+            gridView.Adapter = new ButtonAdapter(this, _routine.ID);
         }
-                
+
+
         private void PopulateTodaysRoutine()
         {
-            _routine = _db.GetTodaysRoutine();
             if (_routine != null)
             {
                 _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");

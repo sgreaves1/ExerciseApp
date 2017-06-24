@@ -14,6 +14,8 @@ namespace ExerciseApp
         private Button _okButton;
         private Button _cancelButton;
 
+        private int _routineId;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -26,6 +28,7 @@ namespace ExerciseApp
 
             // Create your application here
             _exerciseNameLabel.Text = Intent.GetStringExtra("ExerciseName") ?? "Unknown Exercise";
+            _routineId = Intent.GetIntExtra("RoutineId", 0);
         }
 
         private void GetUiElements()
