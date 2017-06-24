@@ -17,7 +17,30 @@ namespace ExerciseApp.Data
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal), path);
         }
 
-        //Testing Committing!
+        public List<WorkoutRoutine> GetRoutines()
+        {
+            List<WorkoutRoutine> routines = new List<WorkoutRoutine>();
+
+            try
+            {
+                var db = new SQLiteConnection(DatabaseLocation);
+
+                var tabel = db.Table<WorkoutRoutine>();
+
+                foreach (var item in tabel)
+                {
+                    item.Exercises = GetExercisesByRoutineId(item.ID);
+                    routines.Add(item);
+                }
+            }
+            catch
+            {
+
+            }
+
+            return routines;
+        }
+
         public Exercise GetTodaysData()
         {
             var db = new SQLiteConnection(DatabaseLocation);
@@ -127,9 +150,27 @@ namespace ExerciseApp.Data
                 {
                     var db = new SQLiteConnection(DatabaseLocation);
                     db.Insert(data);
-                    return "Single data file inserted";
+                    return "New Routine inserted";
                 }
-                return "ID not 0, cant insert";
+                return "ID not 0, cant insert routine";
+            }
+            catch (SQLiteException ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string InsertData(Exercise data)
+        {
+            try
+            {
+                if (data.ID == 0)
+                {
+                    var db = new SQLiteConnection(DatabaseLocation);
+                    db.Insert(data);
+                    return "New exercise inserted";
+                }
+                return "ID not 0, cant insert exercise";
             }
             catch (SQLiteException ex)
             {
@@ -143,11 +184,25 @@ namespace ExerciseApp.Data
             {
                 var db = new SQLiteConnection(DatabaseLocation);
                 db.Update(data);
-                return "Single data file updated";
+                return "exercise updated";
             }
             catch (SQLiteException ex)
             {
                 return ex.Message;
+            }
+        }
+
+        public void DisplayAllDbData()
+        {
+            List<WorkoutRoutine> routines = GetRoutines();
+
+            foreach (var routine in routines)
+            {
+                Console.WriteLine("Routine: " + routine.ID + " " + routine.Date);
+                foreach (var exercise in routine.Exercises)
+                    Console.WriteLine("       Exercise: " + exercise.Name + " " + exercise.Amount);
+
+                Console.WriteLine("");
             }
         }
     }

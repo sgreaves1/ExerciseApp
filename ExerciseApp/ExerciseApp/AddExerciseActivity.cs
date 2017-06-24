@@ -3,12 +3,15 @@ using Android.OS;
 using Android.Widget;
 using System;
 using ExerciseApp.Model;
+using ExerciseApp.Data;
 
 namespace ExerciseApp
 {
     [Activity(Label = "AddExerciseActivity")]
     public class AddExerciseActivity : Activity
     {
+        private readonly Database _db = new Database("exercise.db3");
+
         private TextView _exerciseNameLabel;
         private EditText _amount;
         private Button _okButton;
@@ -43,12 +46,22 @@ namespace ExerciseApp
 
         private void OkButtonOnClick(object sender, EventArgs eventArgs)
         {
-            Exercise exercise = new Exercise()
+            if (int.Parse(_amount.Text) != 0)
             {
-                Name = _exerciseNameLabel.Text,
-                Date = DateTime.Now,
-                Amount = int.Parse(_amount.Text)
-            };
+                Exercise exercise = new Exercise()
+                {
+                    RoutineId = _routineId,
+                    Name = _exerciseNameLabel.Text,
+                    Date = DateTime.Now,
+                    Amount = int.Parse(_amount.Text)
+                };
+
+                _db.InsertData(exercise);
+
+                Finish();
+            }
+
+
         }
         
         private void CancelButtonOnClick(object sender, EventArgs eventArgs)

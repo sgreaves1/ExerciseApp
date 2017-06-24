@@ -14,13 +14,10 @@ namespace ExerciseApp
         private TextView _dateLabel;
         private TextView _routineLabel;
         private TextView _exerciseLabel;
-        private EditText _pushUpsToAdd;
-        private TextView _totalLabel;
-        private Exercise _todaysData;
         private readonly Database _db = new Database("exercise.db3");
 
-        private WorkoutRoutine _routine; 
-
+        private WorkoutRoutine _routine;
+        
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
