@@ -33,7 +33,7 @@ namespace ExerciseApp
             _exerciseNameLabel.Text = Intent.GetStringExtra("ExerciseName") ?? "Unknown Exercise";
             _routineId = Intent.GetIntExtra("RoutineId", 0);
         }
-
+        
         private void GetUiElements()
         {
             _exerciseNameLabel = FindViewById<TextView>(Resource.Id.ExerciseName);

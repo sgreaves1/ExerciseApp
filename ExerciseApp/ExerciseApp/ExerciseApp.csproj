@@ -83,7 +83,9 @@
     <Compile Include="AddExerciseActivity.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="ButtonAdapter.cs" />
+    <Compile Include="EventArguments\AddExerciseEventArgs.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Model\AddExerciseViewItem.cs" />
     <Compile Include="Model\Exercise.cs" />
     <Compile Include="Model\WorkoutRoutine.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -120,6 +122,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\situp.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
