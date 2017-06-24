@@ -3,6 +3,7 @@ using System.IO;
 using ExerciseApp.Model;
 using SQLite;
 using Environment = System.Environment;
+using System.Collections.Generic;
 
 namespace ExerciseApp.Data
 {
@@ -75,6 +76,31 @@ namespace ExerciseApp.Data
             }
 
             return null;
+        }
+
+        public List<Exercise> GetExercisesByRoutineId(int routineId)
+        {
+            List<Exercise> exercises = new List<Exercise>();
+            try
+            {
+                var db = new SQLiteConnection(DatabaseLocation);
+
+                var tabel = db.Table<Exercise>();
+
+                foreach (var item in tabel)
+                {
+                    if (item.RoutineId == routineId)
+                    {
+                        exercises.Add(item);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return exercises;
         }
 
         public string CreateDatabase()

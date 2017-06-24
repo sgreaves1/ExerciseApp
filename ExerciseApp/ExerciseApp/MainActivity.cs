@@ -32,13 +32,21 @@ namespace ExerciseApp
             _db.CreateDatabase();
 
             // Get todays routine from db
-            _routine = _db.GetTodaysRoutine();
+            GetTodaysRotineFromDb();
 
             // Get the UI controls from the loaded layout
             GetUiElements();
 
             // Populate the view from the routine model 
             PopulateTodaysRoutine();
+        }
+
+        private void GetTodaysRotineFromDb()
+        {
+            _routine = _db.GetTodaysRoutine();
+
+            if (_routine.ID > 0)
+                _routine.Exercises = _db.GetExercisesByRoutineId(_routine.ID);
         }
 
         private void GetUiElements()
