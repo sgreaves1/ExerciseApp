@@ -5,6 +5,7 @@ using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
 using ExerciseApp.Dialog;
+using ExerciseApp.EventArguments;
 
 namespace ExerciseApp
 {
@@ -15,9 +16,7 @@ namespace ExerciseApp
         private TextView _routineLabel;
         private Button _editRoutineNameButton;
         private TextView _exerciseLabel;
-        private EditText _pushUpsToAdd;
-        private TextView _totalLabel;
-        private Exercise _todaysData;
+
         private readonly Database _db = new Database("exercise.db3");
 
         private WorkoutRoutine _routine; 
@@ -55,6 +54,7 @@ namespace ExerciseApp
             fragmemtTransaction.AddToBackStack(null);
             // Create and show the dialog
             StringInputDialog dialogFragment = StringInputDialog.NewInstance(null, _routine.Name);
+            dialogFragment.DialogClosed += EditRoutineNameDialogClosed;
             dialogFragment.Show(fragmemtTransaction, "dialog");
         }
 
@@ -73,6 +73,13 @@ namespace ExerciseApp
                 _db.InsertData(_routine);
                 PopulateTodaysRoutine();
             }
+        }
+
+        private void EditRoutineNameDialogClosed(object sender, DialogEventArgs e)
+        {
+            _routine.Name = e.returnString;
+            _db.UpdateData(_routine);
+            _routineLabel.Text = _routine.Name;
         }
 
     }
