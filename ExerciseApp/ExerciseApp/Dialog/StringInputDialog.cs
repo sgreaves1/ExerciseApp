@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.App;
 using Android.Widget;
+using Android.OS;
+using Android.Views;
 
 namespace ExerciseApp.Dialog
 {
     public class StringInputDialog : DialogFragment
     {
-        public static StringInputDialog NewInstance(Bundle bundle)
+        private EditText _routineNameText;
+        private static string _routineName;
+
+        public static StringInputDialog NewInstance(Bundle bundle, string routineName)
         {
+            _routineName = routineName;
             var fragment = new StringInputDialog();
             fragment.Arguments = bundle;
             return fragment;
@@ -25,7 +22,7 @@ namespace ExerciseApp.Dialog
         {
             View view = inflater.Inflate(Resource.Layout.StringInputDialog, container, false);
 
-            GetUiElements();
+            GetUiElements(view);
 
             Dialog.Window.RequestFeature(WindowFeatures.NoTitle);
             Dialog.SetCanceledOnTouchOutside(false);
@@ -33,9 +30,11 @@ namespace ExerciseApp.Dialog
             return view;
         }
 
-        private void GetUiElements()
+        private void GetUiElements(View view)
         {
-
+            _routineNameText = view.FindViewById<EditText>(Resource.Id.routineNameText);
+            _routineNameText.Text = _routineName;
+            _routineNameText.SetSelection(_routineName.Length);
         }
     }
 }

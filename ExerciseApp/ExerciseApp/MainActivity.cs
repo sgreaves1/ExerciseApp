@@ -4,7 +4,6 @@ using Android.Widget;
 using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
-using System.Collections.Generic;
 using ExerciseApp.Dialog;
 
 namespace ExerciseApp
@@ -55,7 +54,7 @@ namespace ExerciseApp
 
             fragmemtTransaction.AddToBackStack(null);
             // Create and show the dialog
-            StringInputDialog dialogFragment = StringInputDialog.NewInstance(null);
+            StringInputDialog dialogFragment = StringInputDialog.NewInstance(null, _routine.Name);
             dialogFragment.Show(fragmemtTransaction, "dialog");
         }
 
