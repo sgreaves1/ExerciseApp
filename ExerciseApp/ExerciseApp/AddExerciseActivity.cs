@@ -46,22 +46,31 @@ namespace ExerciseApp
 
         private void OkButtonOnClick(object sender, EventArgs eventArgs)
         {
-            if (int.Parse(_amount.Text) != 0)
+            try
             {
-                Exercise exercise = new Exercise()
+                if (int.Parse(_amount.Text) > 0)
                 {
-                    RoutineId = _routineId,
-                    Name = _exerciseNameLabel.Text,
-                    Date = DateTime.Now,
-                    Amount = int.Parse(_amount.Text)
-                };
+                    Exercise exercise = new Exercise()
+                    {
+                        RoutineId = _routineId,
+                        Name = _exerciseNameLabel.Text,
+                        Date = DateTime.Now,
+                        Amount = int.Parse(_amount.Text)
+                    };
 
-                _db.InsertData(exercise);
+                    _db.InsertData(exercise);
 
-                Finish();
+                    Finish();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Amount must be greater than 0!", ToastLength.Short).Show();
+                }
             }
-
-
+            catch (Exception)
+            {
+                Toast.MakeText(this, "Invalid Input! Amount should be numbers only!", ToastLength.Short).Show();
+            }
         }
         
         private void CancelButtonOnClick(object sender, EventArgs eventArgs)
