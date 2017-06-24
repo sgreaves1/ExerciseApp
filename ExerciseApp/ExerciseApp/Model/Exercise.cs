@@ -6,7 +6,7 @@ namespace ExerciseApp.Model
     public class Exercise
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int ID { get; }
 
         public int RoutineId { get; set; }
 

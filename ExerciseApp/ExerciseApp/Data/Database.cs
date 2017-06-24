@@ -41,33 +41,6 @@ namespace ExerciseApp.Data
             return routines;
         }
 
-        public Exercise GetTodaysData()
-        {
-            var db = new SQLiteConnection(DatabaseLocation);
-
-            var tabel = db.Table<Exercise>();
-
-            foreach (var item in tabel)
-            {
-                if (item.Date.Year == DateTime.Today.Year)
-                    if (item.Date.Month == DateTime.Today.Month)
-                        if (item.Date.Day == DateTime.Today.Day)
-                        {
-                            Exercise exercise = new Exercise
-                            {
-                                Amount = item.Amount,
-                                Date = item.Date,
-                                ID = item.ID,
-                                Name = item.Name
-                            };
-
-                            return exercise;
-                        }
-            }
-
-            return null;
-        }
-
         public WorkoutRoutine GetTodaysRoutine()
         {
             try
@@ -82,14 +55,7 @@ namespace ExerciseApp.Data
                         if (item.Date.Month == DateTime.Today.Month)
                             if (item.Date.Day == DateTime.Today.Day)
                             {
-                                WorkoutRoutine routine = new WorkoutRoutine
-                                {
-                                    Date = item.Date,
-                                    ID = item.ID,
-                                    Name = item.Name
-                                };
-
-                                return routine;
+                                return item;
                             }
                 }
             }
