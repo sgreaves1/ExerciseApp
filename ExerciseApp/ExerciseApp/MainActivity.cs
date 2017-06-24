@@ -3,6 +3,7 @@ using Android.Widget;
 using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
+using System.Linq;
 
 namespace ExerciseApp
 {
@@ -15,6 +16,7 @@ namespace ExerciseApp
         private readonly Database _db = new Database("exercise.db3");
 
         private WorkoutRoutine _routine;
+        private Exercise _currentExercise;
         
         protected override void OnCreate(Bundle bundle)
         {
@@ -40,8 +42,10 @@ namespace ExerciseApp
         {
             _routine = _db.GetTodaysRoutine();
 
-            if (_routine.ID > 0)
-                _routine.Exercises = _db.GetExercisesByRoutineId(_routine.ID);
+            if (_routine.Id > 0)
+                _routine.Exercises = _db.GetExercisesByRoutineId(_routine.Id);
+
+            _currentExercise = _routine.Exercises.FirstOrDefault(x => x.Done != true);            
         }
 
         private void GetUiElements()
@@ -50,7 +54,7 @@ namespace ExerciseApp
             _routineLabel = FindViewById<TextView>(Resource.Id.routine);
             _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
             var gridView = FindViewById<GridView>(Resource.Id.gridView1);
-            gridView.Adapter = new ButtonAdapter(this, _routine.ID);
+            gridView.Adapter = new ButtonAdapter(this, _routine.Id);
         }
 
 
@@ -59,7 +63,7 @@ namespace ExerciseApp
             if (_routine != null)
             {
                 _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");
-                _exerciseLabel.Text = _routine.Name;
+                _exerciseLabel.Text = _currentExercise != null ? _currentExercise.Name : "None";
                 _routineLabel.Text = _routine.Name;
             }
             else

@@ -29,7 +29,7 @@ namespace ExerciseApp.Data
 
                 foreach (var item in tabel)
                 {
-                    item.Exercises = GetExercisesByRoutineId(item.ID);
+                    item.Exercises = GetExercisesByRoutineId(item.Id);
                     routines.Add(item);
                 }
             }
@@ -112,7 +112,7 @@ namespace ExerciseApp.Data
         {
             try
             {
-                if (data.ID == 0)
+                if (data.Id == 0)
                 {
                     var db = new SQLiteConnection(DatabaseLocation);
                     db.Insert(data);
@@ -130,7 +130,7 @@ namespace ExerciseApp.Data
         {
             try
             {
-                if (data.ID == 0)
+                if (data.Id == 0)
                 {
                     var db = new SQLiteConnection(DatabaseLocation);
                     db.Insert(data);
@@ -164,7 +164,7 @@ namespace ExerciseApp.Data
 
             foreach (var routine in routines)
             {
-                Console.WriteLine("Routine: " + routine.ID + " " + routine.Date);
+                Console.WriteLine("Routine: " + routine.Id + " " + routine.Date);
                 foreach (var exercise in routine.Exercises)
                     Console.WriteLine("       Exercise: " + exercise.Name + " " + exercise.Amount);
 
