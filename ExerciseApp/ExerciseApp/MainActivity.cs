@@ -64,7 +64,7 @@ namespace ExerciseApp
             if (_routine != null)
             {
                 _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");
-                _exerciseLabel.Text = _routine.Name;
+                _exerciseLabel.Text = "None";
                 _routineLabel.Text = _routine.Name;
             }
             else
