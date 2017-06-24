@@ -83,6 +83,7 @@
     <Compile Include="AddExerciseActivity.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="ButtonAdapter.cs" />
+    <Compile Include="Dialog\StringInputDialog.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Model\Exercise.cs" />
     <Compile Include="Model\WorkoutRoutine.cs" />
@@ -94,6 +95,9 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\AddExercise.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\StringInputDialog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
