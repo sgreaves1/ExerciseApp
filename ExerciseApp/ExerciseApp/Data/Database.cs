@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ExerciseApp.Model;
 using SQLite;
@@ -45,15 +46,15 @@ namespace ExerciseApp.Data
             return null;
         }
 
-        public WorkoutRoutine GetTodaysRoutine()
+        public List<WorkoutRoutine> GetTodaysRoutine()
         {
-            try
+            using (var db = new SQLiteConnection(DatabaseLocation))
             {
-                var db = new SQLiteConnection(DatabaseLocation);
+                var toReturn = new List<WorkoutRoutine>();
 
-                var tabel = db.Table<WorkoutRoutine>();
+                var table = db.Table<WorkoutRoutine>();
 
-                foreach (var item in tabel)
+                foreach (var item in table)
                 {
                     if (item.Date.Year == DateTime.Today.Year)
                         if (item.Date.Month == DateTime.Today.Month)
@@ -66,16 +67,12 @@ namespace ExerciseApp.Data
                                     Name = item.Name
                                 };
 
-                                return routine;
+                                toReturn.Add(routine);
                             }
                 }
-            }
-            catch
-            {
 
+                return toReturn;
             }
-
-            return null;
         }
 
         public string CreateDatabase()

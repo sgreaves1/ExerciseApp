@@ -5,21 +5,19 @@ using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
 using System.Collections.Generic;
+using System.Linq;
+using Android.Views;
 
 namespace ExerciseApp
 {
     [Activity(Label = "ExerciseApp", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        private TextView _dateLabel;
-        private TextView _routineLabel;
-        private TextView _exerciseLabel;
-        private EditText _pushUpsToAdd;
         private TextView _totalLabel;
         private Exercise _todaysData;
         private readonly Database _db = new Database("exercise.db3");
 
-        private WorkoutRoutine _routine; 
+        private List<WorkoutRoutine> _routine;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -31,33 +29,32 @@ namespace ExerciseApp
             // Create db if it doesn't exist
             _db.CreateDatabase();
 
+            PopulateTodaysRoutine();
+
             // Get the UI controls from the loaded layout
-            _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
-            _routineLabel = FindViewById<TextView>(Resource.Id.routine);
-            _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
             var gridView = FindViewById<GridView>(Resource.Id.gridView1);
             gridView.Adapter = new ButtonAdapter(this);
 
-            PopulateTodaysRoutine();
+            var listView = FindViewById<ListView>(Resource.Id.listView1);
+            listView.Adapter = new ListViewAdapter(this, _routine);
+
         }
-                
+
+
         private void PopulateTodaysRoutine()
         {
             _routine = _db.GetTodaysRoutine();
-            if (_routine != null)
+
+            if (!_routine.Any())
             {
-                _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");
-                _exerciseLabel.Text = _routine.Name;
-                _routineLabel.Text = _routine.Name;
-            }
-            else
-            {
-                _routine = new WorkoutRoutine();
-                _db.InsertData(_routine);
+                var toAdd = new WorkoutRoutine();
+                _db.InsertData(toAdd);
                 PopulateTodaysRoutine();
             }
         }
 
     }
+
+
 }
 

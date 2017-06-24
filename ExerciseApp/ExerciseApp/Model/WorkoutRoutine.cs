@@ -13,6 +13,13 @@ namespace ExerciseApp.Model
             Date = DateTime.Now;
         }
 
+        public WorkoutRoutine(string name)
+        {
+            ID = 0;
+            Name = name;
+            Date = DateTime.Now;
+        }
+
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
