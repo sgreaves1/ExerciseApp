@@ -31,6 +31,7 @@ namespace ExerciseApp
             if (_routineId > 0)
             {
                 _routine = _db.GetRoutineById(_routineId);
+                _routine.Exercises = _db.GetExercisesByRoutineId(_routineId);
             }
 
             GetUiElements();

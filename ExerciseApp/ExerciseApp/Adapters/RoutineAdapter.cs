@@ -5,8 +5,6 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using ExerciseApp.Model;
@@ -15,10 +13,10 @@ namespace ExerciseApp.Adapters
 {
     class RoutineAdapter : BaseAdapter
     {
-        private Context _context;
+        private Activity _context;
         private WorkoutRoutine _routine;
 
-        public RoutineAdapter(Context c, WorkoutRoutine routine)
+        public RoutineAdapter(Activity c, WorkoutRoutine routine)
         {
             _context = c;
             _routine = routine;
@@ -32,9 +30,15 @@ namespace ExerciseApp.Adapters
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            TextView label = new TextView(_context);
-            label.Text = _routine.Exercises[position].Name;
-            return label;
+            View view = convertView;
+
+            if (view == null)
+                view = _context.LayoutInflater.Inflate(Resource.Layout.ExerciseDetails, null);
+
+            view.FindViewById<TextView>(Resource.Id.exerciseNameLabel).Text = _routine.Exercises[position].Name;
+            view.FindViewById<TextView>(Resource.Id.amountLabel).Text = _routine.Exercises[position].Amount.ToString();
+
+            return view;
         }
     }
 }

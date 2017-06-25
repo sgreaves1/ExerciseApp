@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\RoutineAdapter.cs" />
     <Compile Include="AddExerciseActivity.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="ButtonAdapter.cs" />
@@ -100,6 +101,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ViewRoutine.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ExerciseDetails.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

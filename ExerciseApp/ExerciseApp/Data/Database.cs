@@ -51,7 +51,7 @@ namespace ExerciseApp.Data
 
                 foreach (var item in tabel)
                 {
-                    if (item.ID == routineId)
+                    if (item.Id == routineId)
                         return item;
                 }
             }
