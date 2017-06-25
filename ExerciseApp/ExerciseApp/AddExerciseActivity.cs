@@ -23,7 +23,7 @@ namespace ExerciseApp
         {
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
+            // Set our view from the "AddExercise" layout resource
             SetContentView(Resource.Layout.AddExercise);
 
             // Get the UI controls from the loaded layout
