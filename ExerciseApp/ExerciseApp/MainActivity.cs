@@ -4,6 +4,7 @@ using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
 using System.Linq;
+using System;
 
 namespace ExerciseApp
 {
@@ -13,6 +14,8 @@ namespace ExerciseApp
         private TextView _dateLabel;
         private TextView _routineLabel;
         private TextView _exerciseLabel;
+        private Button _viewButton;
+
         private readonly Database _db = new Database("exercise.db3");
 
         private WorkoutRoutine _routine;
@@ -62,8 +65,15 @@ namespace ExerciseApp
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
             _routineLabel = FindViewById<TextView>(Resource.Id.routine);
             _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
+            _viewButton = FindViewById<Button>(Resource.Id.viewRoutineButton);
+            _viewButton.Click += ViewRoutineButtonClick;
             var gridView = FindViewById<GridView>(Resource.Id.gridView1);
             gridView.Adapter = new ButtonAdapter(this, _routine.Id);
+        }
+
+        private void ViewRoutineButtonClick(object sender, EventArgs e)
+        {
+
         }
 
 
