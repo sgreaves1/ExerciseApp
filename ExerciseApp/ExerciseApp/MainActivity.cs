@@ -5,6 +5,8 @@ using ExerciseApp.Data;
 using ExerciseApp.Model;
 using System.Linq;
 using System;
+using Android.Content;
+
 
 namespace ExerciseApp
 {
@@ -73,7 +75,9 @@ namespace ExerciseApp
 
         private void ViewRoutineButtonClick(object sender, EventArgs e)
         {
-
+            var viewRoutineActivity = new Intent(this, typeof(ViewRoutineActivity));
+            viewRoutineActivity.PutExtra("RoutineId", _routine.Id);
+            StartActivity(viewRoutineActivity);
         }
 
 

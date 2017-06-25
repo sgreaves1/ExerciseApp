@@ -41,6 +41,28 @@ namespace ExerciseApp.Data
             return routines;
         }
 
+        public WorkoutRoutine GetRoutineById(int routineId)
+        {
+            try
+            {
+                var db = new SQLiteConnection(DatabaseLocation);
+
+                var tabel = db.Table<WorkoutRoutine>();
+
+                foreach (var item in tabel)
+                {
+                    if (item.ID == routineId)
+                        return item;
+                }
+            }
+            catch
+            {
+
+            }
+
+            return null;
+        }
+
         public WorkoutRoutine GetTodaysRoutine()
         {
             try
