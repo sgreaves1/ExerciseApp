@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
+using ExerciseApp.Adapters;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
 
@@ -10,6 +11,7 @@ namespace ExerciseApp
     public class ViewRoutineActivity : Activity
     {
         private TextView _routineNameLabel;
+        private ListView _exerciseList;
 
         private int _routineId;
         private WorkoutRoutine _routine;
@@ -37,8 +39,11 @@ namespace ExerciseApp
         private void GetUiElements()
         {
             _routineNameLabel = FindViewById<TextView>(Resource.Id.routine);
-
             _routineNameLabel.Text = _routine.Name;
+
+            _exerciseList = FindViewById<ListView>(Resource.Id.exerciseList);
+            _exerciseList.Adapter = new RoutineAdapter(this, _routine);
+
         }
 
     }
