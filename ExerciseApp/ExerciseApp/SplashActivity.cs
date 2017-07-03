@@ -13,7 +13,7 @@ using ExerciseApp.Data;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "SplashActivity", Theme = "@style/SplashScreen", MainLauncher = true, NoHistory = true)]
+    [Activity(Label = "ExerciseApp", Icon = "@drawable/icon", Theme = "@style/SplashScreen", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : Activity
     {
         private readonly Database _db = new Database("exercise.db3");

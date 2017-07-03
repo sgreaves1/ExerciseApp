@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "ExerciseApp", Icon = "@drawable/icon")]
+    [Activity(Label = "ExerciseApp")]
     public class MainActivity : Activity
     {
         private TextView _dateLabel;
