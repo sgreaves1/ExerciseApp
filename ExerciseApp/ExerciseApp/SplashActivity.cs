@@ -28,7 +28,10 @@ namespace ExerciseApp
         async void SimulatedStartup()
         {
             // Create db if it doesn't exist
-            _db.CreateDatabase();
+            await Task.Run(() =>
+            {
+                _db.CreateDatabase();
+            });
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }
