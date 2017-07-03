@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "ExerciseApp", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "ExerciseApp", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         private TextView _dateLabel;
@@ -27,9 +27,6 @@ namespace ExerciseApp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
-            // Create db if it doesn't exist
-            _db.CreateDatabase();
 
             // Get the UI controls from the loaded layout
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
