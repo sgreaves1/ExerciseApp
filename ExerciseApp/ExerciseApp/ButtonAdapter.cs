@@ -44,7 +44,9 @@ namespace ExerciseApp
 
         private readonly AddExerciseViewItem[] _viewItems =
         {
-            new AddExerciseViewItem() { Name = "Push Ups", Image =  Resource.Drawable.benchpress },
+            new AddExerciseViewItem() { Name = "Push Ups", Image =  Resource.Drawable.pushup },
+            new AddExerciseViewItem() { Name = "Bicep curls", Image =  Resource.Drawable.BicepCurls },
+            new AddExerciseViewItem() { Name = "Bench press", Image =  Resource.Drawable.benchpress },
             new AddExerciseViewItem() { Name = "Sit Ups", Image =  Resource.Drawable.situp },
             new AddExerciseViewItem() { Name = "Run", Image =  Resource.Drawable.run }
         };
