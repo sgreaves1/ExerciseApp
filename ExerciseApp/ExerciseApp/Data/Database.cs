@@ -1,14 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using ExerciseApp.Model;
 using SQLite;
 using Environment = System.Environment;
 
 namespace ExerciseApp.Data
 {
-    public class Database
+    public class Database : IDatabase
     {
-        // I love lima, dave and all me unknown viwers, please make yourself known
         public string DatabaseLocation { get; set; }
 
         public Database(string path)
