@@ -4,6 +4,7 @@ using Android.Widget;
 using System;
 using ExerciseApp.Model;
 using ExerciseApp.Data;
+using ExerciseApp.Eunmerators;
 
 namespace ExerciseApp
 {
@@ -20,6 +21,8 @@ namespace ExerciseApp
         private Button _cancelButton;
 
         private int _routineId;
+        private WeightUnits _weightUnit = WeightUnits.None;
+        
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -60,7 +63,7 @@ namespace ExerciseApp
 
         private void WeightTypeSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
         {
-            
+            _weightUnit = WeightUnitsHelper.FromString(_weightTypeSpinner.GetItemAtPosition(itemSelectedEventArgs.Position).ToString());
         }
 
         private void OkButtonOnClick(object sender, EventArgs eventArgs)
