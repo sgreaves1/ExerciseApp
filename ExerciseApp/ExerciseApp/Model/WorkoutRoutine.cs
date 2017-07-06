@@ -8,13 +8,13 @@ namespace ExerciseApp.Model
     {
         public WorkoutRoutine()
         {
-            ID = 0;
+            Id = 0;
             Name = "None";
             Date = DateTime.Now;
         }
 
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int Id { get; private set; }
 
         public string Name { get; set; }
 
