@@ -111,6 +111,19 @@ namespace ExerciseApp.Data
                 return ex.Message;
             }
         }
+        public string UpdateData(WorkoutRoutine data)
+        {
+            try
+            {
+                var db = new SQLiteConnection(DatabaseLocation);
+                db.Update(data);
+                return "Workout Routine updated";
+            }
+            catch (SQLiteException ex)
+            {
+                return ex.Message;
+            }
+        }
 
         public string UpdateData(Exercise data)
         {
@@ -118,7 +131,7 @@ namespace ExerciseApp.Data
             {
                 var db = new SQLiteConnection(DatabaseLocation);
                 db.Update(data);
-                return "Single data file updated";
+                return "Exercise updated";
             }
             catch (SQLiteException ex)
             {

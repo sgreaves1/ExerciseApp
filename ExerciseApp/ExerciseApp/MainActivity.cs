@@ -4,7 +4,8 @@ using Android.Widget;
 using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
-using System.Collections.Generic;
+using ExerciseApp.Dialog;
+using ExerciseApp.EventArguments;
 
 namespace ExerciseApp
 {
@@ -13,13 +14,16 @@ namespace ExerciseApp
     {
         private TextView _dateLabel;
         private TextView _routineLabel;
+        private Button _editRoutineNameButton;
         private TextView _exerciseLabel;
         private EditText _pushUpsToAdd;
         private TextView _totalLabel;
-        private Exercise _todaysData;
+        
+
         private readonly IDatabase _db = new Database("exercise.db3");
 
-        private WorkoutRoutine _routine; 
+        private WorkoutRoutine _routine;
+        private Exercise _todaysData;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -31,6 +35,8 @@ namespace ExerciseApp
             // Get the UI controls from the loaded layout
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
             _routineLabel = FindViewById<TextView>(Resource.Id.routine);
+            _editRoutineNameButton = FindViewById<Button>(Resource.Id.editRoutineNameButton);
+            _editRoutineNameButton.Click += EditRoutineNameButtonClick;
             _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
             var gridView = FindViewById<GridView>(Resource.Id.gridView1);
             gridView.Adapter = new ButtonAdapter(this);
@@ -38,13 +44,28 @@ namespace ExerciseApp
             PopulateTodaysRoutine();
         }
                 
+        private void EditRoutineNameButtonClick(object sender, EventArgs e)
+        {
+            FragmentTransaction fragmemtTransaction = FragmentManager.BeginTransaction();
+            // Remove fragment from backstack if any exists
+            Fragment fragmentPrev = FragmentManager.FindFragmentByTag("dialog");
+            if (fragmentPrev != null)
+                fragmemtTransaction.Remove(fragmentPrev);
+
+            fragmemtTransaction.AddToBackStack(null);
+            // Create and show the dialog
+            StringInputDialog dialogFragment = StringInputDialog.NewInstance(null, _routine.Name);
+            dialogFragment.DialogClosed += EditRoutineNameDialogClosed;
+            dialogFragment.Show(fragmemtTransaction, "dialog");
+        }
+
         private void PopulateTodaysRoutine()
         {
             _routine = _db.GetTodaysRoutine();
             if (_routine != null)
             {
                 _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");
-                _exerciseLabel.Text = _routine.Name;
+                _exerciseLabel.Text = "None";
                 _routineLabel.Text = _routine.Name;
             }
             else
@@ -53,6 +74,13 @@ namespace ExerciseApp
                 _db.InsertData(_routine);
                 PopulateTodaysRoutine();
             }
+        }
+
+        private void EditRoutineNameDialogClosed(object sender, DialogEventArgs e)
+        {
+            _routine.Name = e.returnString;
+            _db.UpdateData(_routine);
+            _routineLabel.Text = _routine.Name;
         }
 
     }

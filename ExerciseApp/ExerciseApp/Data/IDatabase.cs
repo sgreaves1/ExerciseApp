@@ -7,5 +7,6 @@ namespace ExerciseApp.Data
         string CreateDatabase();
         string InsertData(WorkoutRoutine data);
         WorkoutRoutine GetTodaysRoutine();
+        string UpdateData(WorkoutRoutine data);
     }
 }
