@@ -14,6 +14,8 @@ namespace ExerciseApp
 
         private TextView _exerciseNameLabel;
         private EditText _amount;
+        private EditText _weight;
+        private Spinner _weightTypeSpinner;
         private Button _okButton;
         private Button _cancelButton;
 
@@ -38,10 +40,27 @@ namespace ExerciseApp
         {
             _exerciseNameLabel = FindViewById<TextView>(Resource.Id.ExerciseName);
             _amount = FindViewById<EditText>(Resource.Id.exerciseAmount);
+            _weight = FindViewById<EditText>(Resource.Id.exerciseWeight);
+            _weightTypeSpinner = FindViewById<Spinner>(Resource.Id.weightSpinner);
             _okButton = FindViewById<Button>(Resource.Id.okButton);
             _cancelButton = FindViewById<Button>(Resource.Id.cancelButton);
+
+            // event handlers
+            _weightTypeSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(WeightTypeSpinnerItemSelected);
             _okButton.Click += OkButtonOnClick;
             _cancelButton.Click += CancelButtonOnClick;
+
+            // Spinner adapter
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.weight_types,
+                Android.Resource.Layout.SimpleSpinnerItem);
+
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            _weightTypeSpinner.Adapter = adapter;
+        }
+
+        private void WeightTypeSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
+        {
+            
         }
 
         private void OkButtonOnClick(object sender, EventArgs eventArgs)

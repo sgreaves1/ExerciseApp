@@ -2,4 +2,10 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">ExerciseApp</string>
+
+  <string name="weight_types_prompt">Weight Units</string>
+  <string-array name="weight_types">
+    <item>Kg</item>
+    <item>Lbs</item>
+  </string-array>
 </resources>
