@@ -8,6 +8,8 @@ namespace ExerciseApp.Model
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
+        public int RoutineId { get; set; }
+
         public string Name { get; set; }
 
         public int Amount { get; set; }
@@ -17,6 +19,7 @@ namespace ExerciseApp.Model
         public Exercise()
         {
             ID = 0;
+            RoutineId = 0;
             Name = "Push-Ups";
             Amount = 0;
             Date = DateTime.Today;

@@ -1,10 +1,8 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
 using ExerciseApp.Data;
 using ExerciseApp.Model;
-using System.Collections.Generic;
 
 namespace ExerciseApp
 {
@@ -15,11 +13,12 @@ namespace ExerciseApp
         private TextView _routineLabel;
         private TextView _exerciseLabel;
         private EditText _pushUpsToAdd;
-        private TextView _totalLabel;
-        private Exercise _todaysData;
+        private TextView _totalLabel;        
+
         private readonly IDatabase _db = new Database("exercise.db3");
 
-        private WorkoutRoutine _routine; 
+        private WorkoutRoutine _routine;
+        private Exercise _todaysData;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,20 +26,39 @@ namespace ExerciseApp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+            // Create db if it doesn't exist
+            _db.CreateDatabase();
+
+            // Get todays routine from db
+            GetTodaysRotineFromDb();
 
             // Get the UI controls from the loaded layout
+            GetUiElements();
+
+            // Populate the view from the routine model 
+            PopulateTodaysRoutine();
+        }
+
+        private void GetTodaysRotineFromDb()
+        {
+            _routine = _db.GetTodaysRoutine();
+
+            if (_routine.ID > 0)
+                _routine.Exercises = _db.GetExercisesByRoutineId(_routine.ID);
+        }
+
+        private void GetUiElements()
+        {
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
             _routineLabel = FindViewById<TextView>(Resource.Id.routine);
             _exerciseLabel = FindViewById<TextView>(Resource.Id.exerciseLabel);
             var gridView = FindViewById<GridView>(Resource.Id.gridView1);
-            gridView.Adapter = new ButtonAdapter(this);
-
-            PopulateTodaysRoutine();
+            gridView.Adapter = new ButtonAdapter(this, _routine.ID);
         }
-                
+
+
         private void PopulateTodaysRoutine()
         {
-            _routine = _db.GetTodaysRoutine();
             if (_routine != null)
             {
                 _dateLabel.Text = _routine.Date.ToString(@"dd/MM/yy");
