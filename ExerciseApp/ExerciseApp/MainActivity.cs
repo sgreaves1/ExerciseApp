@@ -7,13 +7,16 @@ using System.Linq;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "ExerciseApp", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "ExerciseApp")]
     public class MainActivity : Activity
     {
         private TextView _dateLabel;
         private TextView _routineLabel;
         private TextView _exerciseLabel;
-        private readonly Database _db = new Database("exercise.db3");
+        private EditText _pushUpsToAdd;
+        private TextView _totalLabel;
+        private Exercise _todaysData;
+        private readonly IDatabase _db = new Database("exercise.db3");
 
         private WorkoutRoutine _routine;
         private Exercise _currentExercise;
