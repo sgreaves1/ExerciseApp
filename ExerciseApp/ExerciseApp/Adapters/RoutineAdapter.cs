@@ -37,6 +37,7 @@ namespace ExerciseApp.Adapters
 
             view.FindViewById<TextView>(Resource.Id.exerciseNameLabel).Text = _routine.Exercises[position].Name;
             view.FindViewById<TextView>(Resource.Id.amountLabel).Text = _routine.Exercises[position].Amount.ToString();
+            view.FindViewById<TextView>(Resource.Id.WeightLabel).Text = _routine.Exercises[position].Weight.ToString();
 
             return view;
         }
