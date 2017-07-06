@@ -1,4 +1,5 @@
 ﻿using System;
+using ExerciseApp.Eunmerators;
 using SQLite;
 
 namespace ExerciseApp.Model
@@ -14,6 +15,10 @@ namespace ExerciseApp.Model
 
         public int Amount { get; set; }
 
+        public double Weight { get; set; }
+
+        public WeightUnits WeightUnits { get; set; }
+
         public DateTime Date { get; set; }
 
         public bool Done { get; set; }
@@ -24,6 +29,7 @@ namespace ExerciseApp.Model
             RoutineId = 0;
             Name = "Push-Ups";
             Amount = 0;
+            Weight = 0;
             Date = DateTime.Today;
             Done = false;
         }

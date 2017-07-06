@@ -49,7 +49,7 @@ namespace ExerciseApp
             _cancelButton = FindViewById<Button>(Resource.Id.cancelButton);
 
             // event handlers
-            _weightTypeSpinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(WeightTypeSpinnerItemSelected);
+            _weightTypeSpinner.ItemSelected += WeightTypeSpinnerItemSelected;
             _okButton.Click += OkButtonOnClick;
             _cancelButton.Click += CancelButtonOnClick;
 
@@ -72,18 +72,20 @@ namespace ExerciseApp
             {
                 if (int.Parse(_amount.Text) > 0)
                 {
-                    Exercise exercise = new Exercise()
+                    Exercise exercise = new Exercise
                     {
                         RoutineId = _routineId,
                         Name = _exerciseNameLabel.Text,
                         Date = DateTime.Now,
                         Amount = int.Parse(_amount.Text),
+                        Weight = double.Parse(_weight.Text),
+                        WeightUnits = _weightUnit,
                         Done = true,
                     };
 
                     _db.InsertData(exercise);
 
-                    Toast.MakeText(this, exercise.Name + " added to todays routine!", ToastLength.Short).Show();
+                    Toast.MakeText(this, exercise.Name + " added to today's routine!", ToastLength.Short).Show();
 
                     Finish();
                 }
