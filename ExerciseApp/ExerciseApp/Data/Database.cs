@@ -7,9 +7,8 @@ using Environment = System.Environment;
 
 namespace ExerciseApp.Data
 {
-    public class Database
+    public class Database : IDatabase
     {
-        // I love lima, dave and all me unknown viwers, please make yourself known
         public string DatabaseLocation { get; set; }
 
         public Database(string path)

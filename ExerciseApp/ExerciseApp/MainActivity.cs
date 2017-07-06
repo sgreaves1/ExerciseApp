@@ -17,7 +17,7 @@ namespace ExerciseApp
         private EditText _pushUpsToAdd;
         private TextView _totalLabel;
         private Exercise _todaysData;
-        private readonly Database _db = new Database("exercise.db3");
+        private readonly IDatabase _db = new Database("exercise.db3");
 
         private WorkoutRoutine _routine; 
 

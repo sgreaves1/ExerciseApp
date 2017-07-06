@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using ExerciseApp.Data;
 
 namespace ExerciseApp
@@ -16,8 +8,8 @@ namespace ExerciseApp
     [Activity(Label = "ExerciseApp", Icon = "@drawable/icon", Theme = "@style/SplashScreen", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : Activity
     {
-        private readonly Database _db = new Database("exercise.db3");
-
+        private readonly IDatabase _db = new Database("exercise.db3");
+        
         protected override void OnResume()
         {
             base.OnResume();
