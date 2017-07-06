@@ -9,17 +9,21 @@ using ExerciseApp.EventArguments;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "ExerciseApp", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "ExerciseApp")]
     public class MainActivity : Activity
     {
         private TextView _dateLabel;
         private TextView _routineLabel;
         private Button _editRoutineNameButton;
         private TextView _exerciseLabel;
+        private EditText _pushUpsToAdd;
+        private TextView _totalLabel;
+        
 
-        private readonly Database _db = new Database("exercise.db3");
+        private readonly IDatabase _db = new Database("exercise.db3");
 
-        private WorkoutRoutine _routine; 
+        private WorkoutRoutine _routine;
+        private Exercise _todaysData;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -27,9 +31,6 @@ namespace ExerciseApp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
-            // Create db if it doesn't exist
-            _db.CreateDatabase();
 
             // Get the UI controls from the loaded layout
             _dateLabel = FindViewById<TextView>(Resource.Id.dateLabel);
