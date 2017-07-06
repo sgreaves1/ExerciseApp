@@ -1,4 +1,5 @@
 ﻿using ExerciseApp.Model;
+using System.Collections.Generic;
 
 namespace ExerciseApp.Data
 {
@@ -7,5 +8,6 @@ namespace ExerciseApp.Data
         string CreateDatabase();
         string InsertData(WorkoutRoutine data);
         WorkoutRoutine GetTodaysRoutine();
+        List<Exercise> GetExercisesByRoutineId(int routineId);
     }
 }
