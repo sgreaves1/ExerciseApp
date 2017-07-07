@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -84,6 +84,7 @@
     <Compile Include="AddExerciseActivity.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="ButtonAdapter.cs" />
+    <Compile Include="Data\IDatabase.cs" />
     <Compile Include="Eunmerators\WeightUnits.cs" />
     <Compile Include="EventArguments\AddExerciseEventArgs.cs" />
     <Compile Include="MainActivity.cs" />
