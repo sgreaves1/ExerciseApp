@@ -36,7 +36,7 @@ namespace ExerciseApp
             // Create db if it doesn't exist
             _db.CreateDatabase();
 
-            // Get todays routine from db
+            // Get today's routine from db
             GetTodaysRotineFromDb();
 
             // Get the UI controls from the loaded layout

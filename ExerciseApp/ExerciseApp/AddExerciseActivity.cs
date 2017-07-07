@@ -61,7 +61,7 @@ namespace ExerciseApp
 
                     _db.InsertData(exercise);
 
-                    Toast.MakeText(this, exercise.Name + " added to todays routine!", ToastLength.Short).Show();
+                    Toast.MakeText(this, string.Format($"{0} added to today's routine!", exercise.Name), ToastLength.Short).Show();
 
                     Finish();
                 }

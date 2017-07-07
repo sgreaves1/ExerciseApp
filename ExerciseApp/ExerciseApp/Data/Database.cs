@@ -5,6 +5,7 @@ using ExerciseApp.Model;
 using SQLite;
 using Environment = System.Environment;
 using System.Collections.Generic;
+using Android.OS;
 
 namespace ExerciseApp.Data
 {
@@ -34,9 +35,9 @@ namespace ExerciseApp.Data
                     routines.Add(item);
                 }
             }
-            catch
+            catch (Exception)
             {
-
+                Console.WriteLine("Error when getting routines from db");
             }
 
             return routines;
@@ -56,9 +57,9 @@ namespace ExerciseApp.Data
                         return item;
                 }
             }
-            catch
+            catch (Exception)
             {
-
+                Console.WriteLine("Error when getting routine from db");
             }
 
             return null;
@@ -82,9 +83,9 @@ namespace ExerciseApp.Data
                             }
                 }
             }
-            catch
+            catch (Exception)
             {
-
+                Console.WriteLine("Error when getting today's routine from db");
             }
 
             return null;
@@ -107,9 +108,9 @@ namespace ExerciseApp.Data
                     }
                 }
             }
-            catch
+            catch (Exception)
             {
-
+                Console.WriteLine("Error when getting exercises from db");
             }
 
             return exercises;
