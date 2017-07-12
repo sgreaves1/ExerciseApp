@@ -2,14 +2,18 @@
 using Android.OS;
 using Android.Widget;
 using System;
+using System.Net.Http;
+using Android.Graphics;
+using Android.Support.V7.App;
 using ExerciseApp.Model;
 using ExerciseApp.Data;
 using ExerciseApp.Eunmerators;
+using Felipecsl.GifImageViewLibrary;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "AddExerciseActivity")]
-    public class AddExerciseActivity : Activity
+    [Activity(Label = "AddExerciseActivity", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
+    public class AddExerciseActivity : AppCompatActivity, GifImageView.IOnFrameAvailableListener
     {
         private readonly Database _db = new Database("exercise.db3");
 
@@ -19,10 +23,11 @@ namespace ExerciseApp
         private Spinner _weightTypeSpinner;
         private Button _okButton;
         private Button _cancelButton;
+        private GifImageView _gifImage;
 
         private int _routineId;
         private WeightUnits _weightUnit = WeightUnits.None;
-        
+        private string _gifLocation;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,7 +41,10 @@ namespace ExerciseApp
 
             // Create your application here
             _exerciseNameLabel.Text = Intent.GetStringExtra("ExerciseName") ?? "Unknown Exercise";
+            _gifLocation = Intent.GetStringExtra("ExerciseGif") ?? "";
             _routineId = Intent.GetIntExtra("RoutineId", 0);
+
+            GetGif();
         }
         
         private void GetUiElements()
@@ -47,7 +55,8 @@ namespace ExerciseApp
             _weightTypeSpinner = FindViewById<Spinner>(Resource.Id.weightSpinner);
             _okButton = FindViewById<Button>(Resource.Id.okButton);
             _cancelButton = FindViewById<Button>(Resource.Id.cancelButton);
-
+            _gifImage = FindViewById<GifImageView>(Resource.Id.gifImageView);
+            
             // event handlers
             _weightTypeSpinner.ItemSelected += WeightTypeSpinnerItemSelected;
             _okButton.Click += OkButtonOnClick;
@@ -59,6 +68,8 @@ namespace ExerciseApp
 
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             _weightTypeSpinner.Adapter = adapter;
+
+            _gifImage.OnFrameAvailableListener = this;
         }
 
         private void WeightTypeSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
@@ -103,6 +114,21 @@ namespace ExerciseApp
         private void CancelButtonOnClick(object sender, EventArgs eventArgs)
         {
             Finish();
+        }
+
+        public Bitmap OnFrameAvailable(Bitmap bitmap)
+        {
+            return bitmap;
+        }
+
+        public async void GetGif()
+        {
+            using (var client = new HttpClient())
+            {
+                var bytes = await client.GetByteArrayAsync(_gifLocation);
+                _gifImage.SetBytes(bytes);
+                _gifImage.StartAnimation();
+            }
         }
     }
 }
