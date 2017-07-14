@@ -57,9 +57,26 @@
         android:layout_height="wrap_content"
         android:id="@+id/cancelButton"
         android:layout_below="@id/okButton" />
-  <com.felipecsl.gifimageview.library.GifImageView
-    android:id="@+id/gifImageView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentBottom="true"/>
+
+  <TextView
+    android:text="@string/Mobile_data_warning"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/warningLabel"
+        android:layout_below="@id/cancelButton"
+        android:layout_centerHorizontal="true"/>
+
+  <Button
+        android:text="Show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/showButton"
+        android:layout_below="@id/cancelButton" />
+  
+    <com.felipecsl.gifimageview.library.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

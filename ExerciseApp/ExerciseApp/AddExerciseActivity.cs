@@ -6,6 +6,7 @@ using System.Net.Http;
 using Android.Graphics;
 using Android.Net;
 using Android.Support.V7.App;
+using Android.Views;
 using ExerciseApp.Model;
 using ExerciseApp.Data;
 using ExerciseApp.Eunmerators;
@@ -24,6 +25,8 @@ namespace ExerciseApp
         private Spinner _weightTypeSpinner;
         private Button _okButton;
         private Button _cancelButton;
+        private TextView _dataWarning;
+        private Button _showButton;
         private GifImageView _gifImage;
 
         private int _routineId;
@@ -57,7 +60,8 @@ namespace ExerciseApp
                 }
                 else if (networkInfo.Type == ConnectivityType.Mobile)
                 {
-
+                    _dataWarning.Visibility = ViewStates.Visible;
+                    _showButton.Visibility = ViewStates.Visible;
                 }
             }
             else
@@ -74,12 +78,15 @@ namespace ExerciseApp
             _weightTypeSpinner = FindViewById<Spinner>(Resource.Id.weightSpinner);
             _okButton = FindViewById<Button>(Resource.Id.okButton);
             _cancelButton = FindViewById<Button>(Resource.Id.cancelButton);
+            _dataWarning = FindViewById<TextView>(Resource.Id.warningLabel);
+            _showButton = FindViewById<Button>(Resource.Id.showButton);
             _gifImage = FindViewById<GifImageView>(Resource.Id.gifImageView);
             
             // event handlers
             _weightTypeSpinner.ItemSelected += WeightTypeSpinnerItemSelected;
             _okButton.Click += OkButtonOnClick;
             _cancelButton.Click += CancelButtonOnClick;
+            _showButton.Click += ShowButtonOnClick;
 
             // Spinner adapter
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.weight_types,
@@ -89,6 +96,16 @@ namespace ExerciseApp
             _weightTypeSpinner.Adapter = adapter;
 
             _gifImage.OnFrameAvailableListener = this;
+
+            _dataWarning.Visibility = ViewStates.Invisible;
+            _showButton.Visibility = ViewStates.Invisible;
+        }
+
+        private void ShowButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            _showButton.Visibility = ViewStates.Invisible;
+            _dataWarning.Visibility = ViewStates.Invisible;
+            GetGif();
         }
 
         private void WeightTypeSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
