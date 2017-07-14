@@ -17,9 +17,7 @@ namespace ExerciseApp
         private TextView _routineLabel;
         private TextView _exerciseLabel;
         private Button _viewButton;
-        private EditText _pushUpsToAdd;
-        private TextView _totalLabel;
-        private Exercise _todaysData;
+
         private readonly IDatabase _db = new Database("exercise.db3");
 
         private WorkoutRoutine _routine;
@@ -31,9 +29,6 @@ namespace ExerciseApp
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
-            // Create db if it doesn't exist
-            _db.CreateDatabase();
 
             // Get today's routine from db
             GetTodaysRotineFromDb();

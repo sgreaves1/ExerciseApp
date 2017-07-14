@@ -30,7 +30,7 @@ namespace ExerciseApp
             var button = new ImageButton(context) {LayoutParameters = new GridView.LayoutParams(200, 200)};
             button.SetScaleType(ImageView.ScaleType.CenterCrop);
             button.SetImageResource(_viewItems[position].Image);
-            button.Click += (sender, e) => ButtonOnClick(this, new AddExerciseEventArgs() { Name = _viewItems[position].Name });
+            button.Click += (sender, e) => ButtonOnClick(this, new AddExerciseEventArgs() { Name = _viewItems[position].Name, Gif = _viewItems[position].Gif});
             return button;
         }
 
@@ -38,17 +38,18 @@ namespace ExerciseApp
         {
             var activity2 = new Intent(context, typeof(AddExerciseActivity));
             activity2.PutExtra("ExerciseName", ((AddExerciseEventArgs)eventArgs).Name);
+            activity2.PutExtra("ExerciseGif", ((AddExerciseEventArgs)eventArgs).Gif);
             activity2.PutExtra("RoutineId", _routineId);
             context.StartActivity(activity2);
         }
 
         private readonly AddExerciseViewItem[] _viewItems =
         {
-            new AddExerciseViewItem() { Name = "Push Ups", Image =  Resource.Drawable.pushup },
-            new AddExerciseViewItem() { Name = "Bicep curls", Image =  Resource.Drawable.BicepCurls },
-            new AddExerciseViewItem() { Name = "Bench press", Image =  Resource.Drawable.benchpress },
-            new AddExerciseViewItem() { Name = "Sit Ups", Image =  Resource.Drawable.situp },
-            new AddExerciseViewItem() { Name = "Run", Image =  Resource.Drawable.run }
+            new AddExerciseViewItem() { Name = "Push Ups", Image =  Resource.Drawable.pushup, Gif =  "https://media.giphy.com/media/tf47T8m4I8Zva/giphy.gif"},
+            new AddExerciseViewItem() { Name = "Bicep curls", Image =  Resource.Drawable.BicepCurls, Gif = "https://media.giphy.com/media/ND1r9zoBPgfC/giphy.gif"},
+            new AddExerciseViewItem() { Name = "Bench press", Image =  Resource.Drawable.benchpress, Gif = "https://media.giphy.com/media/fuu6c9R2HPB7y/giphy.gif"},
+            new AddExerciseViewItem() { Name = "Sit Ups", Image =  Resource.Drawable.situp, Gif = "https://media.giphy.com/media/HnfH76fdZOhP2/giphy.gif" },
+            new AddExerciseViewItem() { Name = "Run", Image =  Resource.Drawable.run, Gif = "https://media.giphy.com/media/l2Sqc3POpzkj5r8SQ/giphy.gif" }
         };
     }
 }

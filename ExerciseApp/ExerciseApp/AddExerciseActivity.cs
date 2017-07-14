@@ -2,14 +2,20 @@
 using Android.OS;
 using Android.Widget;
 using System;
+using System.Net.Http;
+using Android.Graphics;
+using Android.Net;
+using Android.Support.V7.App;
+using Android.Views;
 using ExerciseApp.Model;
 using ExerciseApp.Data;
 using ExerciseApp.Eunmerators;
+using Felipecsl.GifImageViewLibrary;
 
 namespace ExerciseApp
 {
-    [Activity(Label = "AddExerciseActivity")]
-    public class AddExerciseActivity : Activity
+    [Activity(Label = "AddExerciseActivity", Theme = "@style/Theme.AppCompat.Light.NoActionBar")]
+    public class AddExerciseActivity : AppCompatActivity, GifImageView.IOnFrameAvailableListener
     {
         private readonly Database _db = new Database("exercise.db3");
 
@@ -19,10 +25,13 @@ namespace ExerciseApp
         private Spinner _weightTypeSpinner;
         private Button _okButton;
         private Button _cancelButton;
+        private TextView _dataWarning;
+        private Button _showButton;
+        private GifImageView _gifImage;
 
         private int _routineId;
         private WeightUnits _weightUnit = WeightUnits.None;
-        
+        private string _gifLocation;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,7 +45,29 @@ namespace ExerciseApp
 
             // Create your application here
             _exerciseNameLabel.Text = Intent.GetStringExtra("ExerciseName") ?? "Unknown Exercise";
+            _gifLocation = Intent.GetStringExtra("ExerciseGif") ?? "";
             _routineId = Intent.GetIntExtra("RoutineId", 0);
+
+            ConnectivityManager connectivityManager = (ConnectivityManager) GetSystemService(ConnectivityService);
+
+            NetworkInfo networkInfo = connectivityManager.ActiveNetworkInfo;
+
+            if (networkInfo.IsConnected)
+            {
+                if (networkInfo.Type == ConnectivityType.Wifi)
+                {
+                    GetGif();
+                }
+                else if (networkInfo.Type == ConnectivityType.Mobile)
+                {
+                    _dataWarning.Visibility = ViewStates.Visible;
+                    _showButton.Visibility = ViewStates.Visible;
+                }
+            }
+            else
+            {
+                
+            }
         }
         
         private void GetUiElements()
@@ -47,11 +78,15 @@ namespace ExerciseApp
             _weightTypeSpinner = FindViewById<Spinner>(Resource.Id.weightSpinner);
             _okButton = FindViewById<Button>(Resource.Id.okButton);
             _cancelButton = FindViewById<Button>(Resource.Id.cancelButton);
-
+            _dataWarning = FindViewById<TextView>(Resource.Id.warningLabel);
+            _showButton = FindViewById<Button>(Resource.Id.showButton);
+            _gifImage = FindViewById<GifImageView>(Resource.Id.gifImageView);
+            
             // event handlers
             _weightTypeSpinner.ItemSelected += WeightTypeSpinnerItemSelected;
             _okButton.Click += OkButtonOnClick;
             _cancelButton.Click += CancelButtonOnClick;
+            _showButton.Click += ShowButtonOnClick;
 
             // Spinner adapter
             var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.weight_types,
@@ -59,6 +94,18 @@ namespace ExerciseApp
 
             adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             _weightTypeSpinner.Adapter = adapter;
+
+            _gifImage.OnFrameAvailableListener = this;
+
+            _dataWarning.Visibility = ViewStates.Invisible;
+            _showButton.Visibility = ViewStates.Invisible;
+        }
+
+        private void ShowButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            _showButton.Visibility = ViewStates.Invisible;
+            _dataWarning.Visibility = ViewStates.Invisible;
+            GetGif();
         }
 
         private void WeightTypeSpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
@@ -103,6 +150,21 @@ namespace ExerciseApp
         private void CancelButtonOnClick(object sender, EventArgs eventArgs)
         {
             Finish();
+        }
+
+        public Bitmap OnFrameAvailable(Bitmap bitmap)
+        {
+            return bitmap;
+        }
+
+        public async void GetGif()
+        {
+            using (var client = new HttpClient())
+            {
+                var bytes = await client.GetByteArrayAsync(_gifLocation);
+                _gifImage.SetBytes(bytes);
+                _gifImage.StartAnimation();
+            }
         }
     }
 }

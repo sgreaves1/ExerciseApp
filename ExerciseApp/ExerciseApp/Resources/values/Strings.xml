@@ -8,4 +8,6 @@
     <item>Kg</item>
     <item>Lbs</item>
   </string-array>
+
+  <string name="Mobile_data_warning">Warning! Connected to mobile data. Loading gif could cost you data.</string>
 </resources>
