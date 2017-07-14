@@ -4,6 +4,7 @@ using Android.Widget;
 using System;
 using System.Net.Http;
 using Android.Graphics;
+using Android.Net;
 using Android.Support.V7.App;
 using ExerciseApp.Model;
 using ExerciseApp.Data;
@@ -44,7 +45,25 @@ namespace ExerciseApp
             _gifLocation = Intent.GetStringExtra("ExerciseGif") ?? "";
             _routineId = Intent.GetIntExtra("RoutineId", 0);
 
-            GetGif();
+            ConnectivityManager connectivityManager = (ConnectivityManager) GetSystemService(ConnectivityService);
+
+            NetworkInfo networkInfo = connectivityManager.ActiveNetworkInfo;
+
+            if (networkInfo.IsConnected)
+            {
+                if (networkInfo.Type == ConnectivityType.Wifi)
+                {
+                    GetGif();
+                }
+                else if (networkInfo.Type == ConnectivityType.Mobile)
+                {
+
+                }
+            }
+            else
+            {
+                
+            }
         }
         
         private void GetUiElements()
